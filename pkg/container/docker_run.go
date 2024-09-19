@@ -123,7 +123,7 @@ func (cr *containerReference) Copy(destPath string, files ...*FileEntry) common.
 
 func (cr *containerReference) CopyDir(destPath string, srcPath string, useGitIgnore bool) common.Executor {
 	return common.NewPipelineExecutor(
-		common.NewInfoExecutor("%sdocker cp src=%s dst=%s", logPrefix, srcPath, destPath),
+		common.NewInfoExecutor("%sdocker --v %s:%s", logPrefix, srcPath, destPath),
 		cr.copyDir(destPath, srcPath, useGitIgnore),
 		func(ctx context.Context) error {
 			// If this fails, then folders have wrong permissions on non root container
